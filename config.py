@@ -24,9 +24,8 @@ TELEGRAM_TOKEN = get_config("TELEGRAM_TOKEN")
 NGROK_AUTHTOKEN = get_config("NGROK_AUTHTOKEN")
 MCP_CONFIG_PATH = get_config("MCP_CONFIG_PATH", "mcp_config.json")
 
-# Vector Database (Qdrant)
-QDRANT_URL = get_config("QDRANT_URL", None) # None means in-memory for Colab
-QDRANT_COLLECTION = get_config("QDRANT_COLLECTION", "openviking_memory")
+# Cloud Database (Firebase Firestore)
+FIREBASE_PROJECT_ID = get_config("FIREBASE_PROJECT_ID")
 
 # Agent Settings
 MAX_RETRIES = 3

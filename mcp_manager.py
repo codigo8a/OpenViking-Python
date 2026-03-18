@@ -18,7 +18,10 @@ class MCPManager:
             return {}
         try:
             with open(self.config_path, 'r', encoding='utf-8') as f:
-                return json.load(f).get("mcpServers", {})
+                content = f.read()
+                # Resolve environment variables like $VAR or ${VAR}
+                expanded_content = os.path.expandvars(content)
+                return json.loads(expanded_content).get("mcpServers", {})
         except Exception as e:
             logger.error(f"Error loading MCP config: {e}")
             return {}

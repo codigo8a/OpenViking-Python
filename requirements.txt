@@ -1,6 +1,6 @@
 requests
 python-telegram-bot
-qdrant-client
+firebase-admin
 python-dotenv
 pyngrok
 mcp
