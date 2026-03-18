@@ -9,10 +9,15 @@ logger = get_logger("memory")
 class MemoryManager:
     def __init__(self):
         try:
-            self.client = QdrantClient(url=QDRANT_URL)
+            if QDRANT_URL:
+                logger.info(f"Connecting to Qdrant at {QDRANT_URL}")
+                self.client = QdrantClient(url=QDRANT_URL)
+            else:
+                logger.info("Using in-memory Qdrant (Colab-friendly)")
+                self.client = QdrantClient(":memory:")
             self._ensure_collection()
         except Exception as e:
-            logger.error(f"Failed to connect to Qdrant: {e}")
+            logger.error(f"Failed to initialize Qdrant: {e}")
             self.client = None
 
     def _ensure_collection(self):

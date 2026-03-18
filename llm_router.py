@@ -3,6 +3,7 @@ import requests
 from typing import Optional
 from config import (
     GROQ_API_KEY, OPENROUTER_API_KEY, CEREBRAS_API_KEY,
+    OLLAMA_URL, OLLAMA_MODEL,
     MAX_RETRIES, DEFAULT_COOLDOWN, SHORT_COOLDOWN
 )
 from logger import get_logger
@@ -12,11 +13,13 @@ logger = get_logger("llm_router")
 class LLMRouter:
     def __init__(self):
         self.cooldowns = {
+            "ollama": 0,
             "groq": 0,
             "openrouter": 0,
             "cerebras": 0
         }
         self.providers = [
+            {"name": "ollama", "url": OLLAMA_URL, "key": "none", "model": OLLAMA_MODEL},
             {"name": "groq", "url": "https://api.groq.com/openai/v1/chat/completions", "key": GROQ_API_KEY, "model": "llama3-70b-8192"},
             {"name": "cerebras", "url": "https://api.cerebras.ai/v1/chat/completions", "key": CEREBRAS_API_KEY, "model": "llama3.1-70b"},
             {"name": "openrouter", "url": "https://openrouter.ai/api/v1/chat/completions", "key": OPENROUTER_API_KEY, "model": "meta-llama/llama-3-70b-instruct"}
