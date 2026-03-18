@@ -48,7 +48,7 @@ class LLMRouter:
         }
 
         try:
-            response = requests.post(provider["url"], json=data, headers=headers, timeout=15)
+            response = requests.post(provider["url"], json=data, headers=headers, timeout=60)
             
             if response.status_code == 200:
                 return response.json()["choices"][0]["message"]["content"]
