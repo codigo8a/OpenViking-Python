@@ -21,6 +21,7 @@ OLLAMA_MODEL = get_config("OLLAMA_MODEL", "llama3:8b")
 
 # Telegram Configuration
 TELEGRAM_TOKEN = get_config("TELEGRAM_TOKEN")
+NGROK_AUTHTOKEN = get_config("NGROK_AUTHTOKEN")
 
 # Vector Database (Qdrant)
 QDRANT_URL = get_config("QDRANT_URL", None) # None means in-memory for Colab
