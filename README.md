@@ -36,6 +36,16 @@
    docker-compose up -d
    ```
 
+## ☁️ Ejecutar en Google Colab
+
+Si no quieres instalar nada localmente, puedes usar el notebook oficial:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/codigo8a/OpenViking-Python/blob/google-colab/OpenViking_Colab.ipynb)
+
+1. Abre el enlace arriba.
+2. Configura tus **Secrets** (icono 🔑) con `TELEGRAM_TOKEN`, `GROQ_API_KEY`, etc.
+3. Ejecuta las celdas en orden.
+
 ## 🤖 Uso
 
 ### Modo CLI
