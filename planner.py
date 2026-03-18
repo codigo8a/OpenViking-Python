@@ -21,8 +21,21 @@ CONTEXTO DEL SISTEMA:
 - Directorio actual: .
 """
 
-    def generate_prompt(self, task: str, context: str = "") -> str:
+    def generate_prompt(self, task: str, context: str = "", skills: list = None, mcp_tools: list = None) -> str:
         prompt = f"{self.system_prompt}\n\n"
+        
+        if skills:
+            prompt += "SKILLS LOCALES DISPONIBLES:\n"
+            for s in skills:
+                prompt += f"- {s['name']}: {s['description']} (Uso: {s['usage']})\n"
+            prompt += "\n"
+            
+        if mcp_tools:
+            prompt += "HERRAMIENTAS MCP (SERVER) DISPONIBLES:\n"
+            for t in mcp_tools:
+                prompt += f"- {t['server']}: {t['description']} (Ejecución via run_command: npx {t['server']} ...)\n"
+            prompt += "\n"
+
         if context:
             prompt += f"MEMORIA/CONTEXTO:\n{context}\n\n"
         prompt += f"TAREA ACTUAL:\n{task}\n"

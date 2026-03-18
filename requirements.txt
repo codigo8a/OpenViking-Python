@@ -3,3 +3,4 @@ python-telegram-bot
 qdrant-client
 python-dotenv
 pyngrok
+mcp

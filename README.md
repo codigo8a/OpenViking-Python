@@ -66,6 +66,20 @@ python telegram_bot.py
 > **OpenViking tiene acceso a tu shell.** 
 > Nunca lo ejecutes como usuario root. No le des acceso a sistemas de producción sensibles sin supervisión. Todos los comandos ejecutados se registran en `agent.log`.
 
+## 🛠️ Extensibilidad
+
+### Skills Locales (Cerebro Local)
+Puedes añadir cualquier script de Python a la carpeta `skills/`.
+- Ejemplo: `skills/mi_skill.py`.
+- Formato: La primera línea debe ser un comentario descriptivo: `# Descripción: Mi skill hace esto...`.
+- El agente lo detectará automáticamente y aprenderá a usarlo.
+
+### MCP (Model Context Protocol)
+OpenViking soporta la conexión a servidores MCP externos.
+1. Edita `mcp_config.json`.
+2. Añade tus servidores (por ejemplo, Google Search, Slack, etc.).
+3. El agente podrá usar esas herramientas automáticamente.
+
 ## 📁 Estructura
 
 - `agent.py`: Cerebro y loop principal.

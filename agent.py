@@ -3,6 +3,9 @@ from llm_router import router
 from tools import run_command
 from memory import memory
 from planner import planner
+from skills_manager import skills_manager
+from mcp_manager import mcp_manager
+import asyncio
 from logger import get_logger
 
 logger = get_logger("agent")
@@ -29,11 +32,20 @@ class OpenVikingAgent:
         # 1. Search memory for context
         context = memory.search_memory(task)
         
-        # 2. Generate prompt and ask LLM
-        prompt = planner.generate_prompt(task, context)
+        # 2. Get available Skills and MCP Tools
+        skills = skills_manager.get_available_skills()
+        mcp_tools = []
+        try:
+            # We use a simple fetch since we can't do full async easily here without changing the whole loop
+            mcp_tools = asyncio.run(mcp_manager.list_tools())
+        except:
+            pass
+
+        # 3. Generate prompt and ask LLM
+        prompt = planner.generate_prompt(task, context, skills, mcp_tools)
         llm_output = router.ask(prompt)
         
-        # 3. Parse decision
+        # 4. Parse decision
         action, command, response = self.parse_response(llm_output)
         
         logger.info(f"Decision: {action} | Msg: {response}")
